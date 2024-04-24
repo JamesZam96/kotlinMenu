@@ -62,13 +62,13 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
             show()
         }
     }
-
+    //Menu de opciones onCreate
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         //val inflater: MenuInflater = menuInflater
         menuInflater.inflate(R.menu.menu_app_actions, menu)
         return true
     }
-
+    //Menu de opciones onOptions
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.itemSettings->{
@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
             else->super.onOptionsItemSelected(item)
         }
     }
-
+    //Menu contextual onCreate
     override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         menuInflater.inflate(R.menu.menu_ui_elements_actions,menu)
     }
 
+    //Menu contextual onContext
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.item_edit->{
