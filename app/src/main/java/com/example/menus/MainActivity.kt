@@ -18,41 +18,8 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
 
-    /*private val actionModeCallback = object : ActionMode.Callback {
-        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
-            val inflater: MenuInflater = mode.menuInflater
-            inflater.inflate(R.menu.menu_ui_elements_actions, menu)
-            return true
-        }
 
-        override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
-            return false
-        }
-
-        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-            return when (item.itemId) {
-                R.id.item_edit -> {
-                    Toast.makeText(this@MainActivity, "Edit", Toast.LENGTH_SHORT).show()
-                    mode.finish()
-                    true
-                }
-
-                R.id.item_delete -> {
-                    Toast.makeText(this@MainActivity, "Delete", Toast.LENGTH_SHORT).show()
-                    mode.finish()
-                    true
-                }
-
-                else -> false
-            }
-        }
-
-        override fun onDestroyActionMode(mode: ActionMode) {
-            actionMode = null
-        }
-    }
-    var actionMode:ActionMode? = TODO()*/
-
+    private var actionMode:ActionMode? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -66,9 +33,9 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         val item2:TextView = findViewById(R.id.p2)
         var item3:TextView = findViewById(R.id.p3)
         registerForContextMenu(item1)
-        registerForContextMenu(item2)
-        //registerForContextMenu(item3)
-        /*item2.setOnLongClickListener{view->
+        //registerForContextMenu(item2)
+        //registerForContextMenu(item2)
+        item2.setOnLongClickListener{view->
             when(actionMode){
                 null->{
                     actionMode = this.startActionMode(actionModeCallback)
@@ -77,7 +44,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
                 }
                 else->false
             }
-        }*/
+        }
         item3.setOnClickListener{
             /*val popup = PopupMenu(this,it)
             val inflater: MenuInflater = popup.menuInflater
@@ -138,7 +105,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
             else->super.onContextItemSelected(item)
         }
     }
-
+    // Manejo de click para el menu popup
     override fun onMenuItemClick(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.item1->{
@@ -152,6 +119,41 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
             else->false
         }
     }
+    // Menu contextual en la barra
+    private val actionModeCallback = object : ActionMode.Callback {
+        override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+            val inflater: MenuInflater = mode.menuInflater
+            inflater.inflate(R.menu.menu_ui_elements_actions, menu)
+            return true
+        }
+
+        override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
+            return false
+        }
+
+        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+            return when (item.itemId) {
+                R.id.item_edit -> {
+                    Toast.makeText(this@MainActivity, "Edit", Toast.LENGTH_SHORT).show()
+                    mode.finish()
+                    true
+                }
+
+                R.id.item_delete -> {
+                    Toast.makeText(this@MainActivity, "Delete", Toast.LENGTH_SHORT).show()
+                    mode.finish()
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        override fun onDestroyActionMode(mode: ActionMode) {
+            actionMode = null
+        }
+    }
+
 
 
 }
